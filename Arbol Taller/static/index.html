@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HackTree · Simulador de árbol de ataque</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>HackTree</h1>
+      <p class="subtitle">Explora cómo un atacante podría llegar a su objetivo y cómo cada defensa reduce el riesgo.</p>
+    </div>
+    <dl class="summary" aria-live="polite">
+      <div class="summary-main">
+        <dt>Probabilidad de compromiso</dt>
+        <dd><span id="stat-before" class="before"></span><span id="stat-current">–</span></dd>
+      </div>
+      <div><dt>Nodos</dt><dd id="stat-nodes">–</dd></div>
+      <div><dt>Hojas</dt><dd id="stat-leaves">–</dd></div>
+      <div><dt>Altura</dt><dd id="stat-height">–</dd></div>
+      <div><dt>Defensas activas</dt><dd id="stat-mitigations">–</dd></div>
+    </dl>
+  </header>
+
+  <div class="toolbar">
+    <button id="btn-expand">Expandir todo</button>
+    <button id="btn-collapse">Contraer todo</button>
+    <button id="btn-center">Centrar vista</button>
+    <span class="sep"></span>
+    <button id="btn-dfs">Recorrido en profundidad</button>
+    <button id="btn-bfs">Recorrido en anchura</button>
+    <span class="sep"></span>
+    <form id="search-form" role="search">
+      <input id="search-input" type="search" placeholder="Buscar amenaza…" aria-label="Buscar amenaza">
+      <button type="submit">Buscar</button>
+    </form>
+    <button id="btn-reset" class="ghost">Reiniciar simulación</button>
+  </div>
+
+  <main class="workspace">
+    <section class="canvas-wrap" aria-label="Árbol de ataque">
+      <svg id="tree" role="img" aria-label="Árbol de ataque interactivo"></svg>
+      <ul class="legend" aria-label="Leyenda">
+        <li><i class="dot low"></i>Riesgo bajo</li>
+        <li><i class="dot medium"></i>Riesgo medio</li>
+        <li><i class="dot high"></i>Riesgo alto</li>
+        <li><i class="gate">Y</i>Se necesitan todas las condiciones</li>
+        <li><i class="gate">O</i>Basta con una condición</li>
+      </ul>
+      <p id="traversal-log" class="traversal-log" hidden></p>
+    </section>
+
+    <aside id="panel" class="panel" aria-live="polite"></aside>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
